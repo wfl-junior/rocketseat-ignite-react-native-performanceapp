@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 import { Friend } from "../screens/Home";
 import { FriendItem } from "./FriendItem";
 
@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   list: {
-    marginTop: 20,
+    marginVertical: 20,
   },
 });
 
@@ -31,11 +31,14 @@ export const FriendList: React.FC<FriendListProps> = ({
     <View>
       <Text style={styles.totalLikes}>Total de likes: {totalLikes}</Text>
 
-      <ScrollView style={styles.list}>
-        {friends.map(friend => (
-          <FriendItem key={friend.id} data={friend} onUnfollow={onUnfollow} />
-        ))}
-      </ScrollView>
+      <FlatList
+        style={styles.list}
+        data={friends}
+        keyExtractor={friend => friend.id}
+        renderItem={({ item: friend }) => (
+          <FriendItem data={friend} onUnfollow={onUnfollow} />
+        )}
+      />
     </View>
   );
 };
