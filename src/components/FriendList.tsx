@@ -16,9 +16,13 @@ const styles = StyleSheet.create({
 
 interface FriendListProps {
   friends: Friend[];
+  onUnfollow: () => void;
 }
 
-export const FriendList: React.FC<FriendListProps> = ({ friends }) => {
+export const FriendList: React.FC<FriendListProps> = ({
+  friends,
+  onUnfollow,
+}) => {
   const totalLikes = useMemo(() => {
     return friends.reduce((likes, friend) => likes + friend.likes, 0);
   }, [friends]);
@@ -29,7 +33,7 @@ export const FriendList: React.FC<FriendListProps> = ({ friends }) => {
 
       <ScrollView showsVerticalScrollIndicator={false} style={styles.list}>
         {friends.map(friend => (
-          <FriendItem key={friend.id} data={friend} />
+          <FriendItem key={friend.id} data={friend} onUnfollow={onUnfollow} />
         ))}
       </ScrollView>
     </View>

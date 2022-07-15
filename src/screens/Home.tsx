@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { FriendList } from "../components/FriendList";
 import { fetchWrapper } from "../utils/fetchWrapper";
@@ -38,6 +38,10 @@ export const Home: React.FC = () => {
     setFriends(data);
   }
 
+  const handleUnfollow = useCallback(() => {
+    console.log("unfollow user");
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Amigos</Text>
@@ -54,7 +58,7 @@ export const Home: React.FC = () => {
 
       <Button title="Buscar" onPress={handleSearch} />
 
-      <FriendList friends={friends} />
+      <FriendList friends={friends} onUnfollow={handleUnfollow} />
     </View>
   );
 };
