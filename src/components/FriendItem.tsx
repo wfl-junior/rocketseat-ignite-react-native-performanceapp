@@ -1,3 +1,4 @@
+import isEqual from "lodash/isEqual";
 import { memo } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Friend } from "../screens/Home";
@@ -28,5 +29,5 @@ const FriendItemComponent: React.FC<FriendProps> = ({ data, onUnfollow }) => (
 );
 
 export const FriendItem = memo(FriendItemComponent, (prevProps, nextProps) => {
-  return Object.is(prevProps.data, nextProps.data);
+  return isEqual(prevProps.data, nextProps.data);
 });
