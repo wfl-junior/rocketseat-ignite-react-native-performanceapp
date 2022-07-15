@@ -31,7 +31,7 @@ export const FriendList: React.FC<FriendListProps> = ({
     <View>
       <Text style={styles.totalLikes}>Total de likes: {totalLikes}</Text>
 
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.list}>
+      <ScrollView style={styles.list}>
         {friends.map(friend => (
           <FriendItem key={friend.id} data={friend} onUnfollow={onUnfollow} />
         ))}

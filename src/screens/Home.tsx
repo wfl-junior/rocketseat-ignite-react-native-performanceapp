@@ -20,10 +20,14 @@ const styles = StyleSheet.create({
   },
 });
 
-export interface Friend {
+export interface FriendDTO {
   id: string;
   name: string;
   likes: number;
+}
+
+export interface Friend extends FriendDTO {
+  online: string;
 }
 
 export const Home: React.FC = () => {
@@ -31,11 +35,20 @@ export const Home: React.FC = () => {
   const [name, setName] = useState("");
 
   async function handleSearch() {
-    const data = await fetchWrapper<Friend[]>(
+    const data = await fetchWrapper<FriendDTO[]>(
       `http://192.168.1.12:3333/friends?q=${name}`,
     );
 
-    setFriends(data);
+    setFriends(
+      data.map(friend => {
+        const date = new Date();
+
+        return {
+          ...friend,
+          online: `${date.getHours()}:${date.getMinutes()}`,
+        };
+      }),
+    );
   }
 
   const handleUnfollow = useCallback(() => {

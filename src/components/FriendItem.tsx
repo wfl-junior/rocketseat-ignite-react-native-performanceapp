@@ -5,10 +5,6 @@ import { Friend } from "../screens/Home";
 const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
-    flexDirection: "row",
-  },
-  unfollowButton: {
-    marginLeft: 10,
   },
 });
 
@@ -23,9 +19,11 @@ const FriendItemComponent: React.FC<FriendProps> = ({ data, onUnfollow }) => (
       {data.name} - Likes: {data.likes}
     </Text>
 
-    <TouchableOpacity style={styles.unfollowButton} onPress={onUnfollow}>
+    <TouchableOpacity onPress={onUnfollow}>
       <Text>Deixar de seguir</Text>
     </TouchableOpacity>
+
+    <Text>Online em {data.online}</Text>
   </View>
 );
 
