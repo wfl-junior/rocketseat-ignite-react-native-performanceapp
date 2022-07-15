@@ -15,7 +15,7 @@ interface FriendListProps {
 export const FriendList: React.FC<FriendListProps> = ({ friends }) => (
   <ScrollView showsVerticalScrollIndicator={false} style={styles.list}>
     {friends.map(friend => (
-      <FriendItem key={friend.id} {...friend} />
+      <FriendItem key={friend.id} data={friend} />
     ))}
   </ScrollView>
 );
